@@ -4,7 +4,7 @@
   "description": "Application to create short url and QR Codes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
