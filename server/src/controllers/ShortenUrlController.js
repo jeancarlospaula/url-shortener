@@ -39,8 +39,8 @@ class ShortenUrlController{
             })
     
             const json = {
-                short_url: process.env.HOST + newHash,
-                qr_code: `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${longUrl}`
+                shortened_url: process.env.HOST + newHash,
+                qr_code_url: `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${longUrl}`
             }
     
             res.writeHead(201, {'Content-Type': 'application/json'})
