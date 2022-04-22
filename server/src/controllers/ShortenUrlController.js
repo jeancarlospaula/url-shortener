@@ -28,7 +28,7 @@ class ShortenUrlController{
             }
         
             if(!newHash){
-                newHash = crypto.randomBytes(7).toString('hex')
+                newHash = await ShortenUrlController.generateHash()
             }
     
             await ShortUrlModel.create({
@@ -52,6 +52,20 @@ class ShortenUrlController{
             res.write(JSON.stringify({'error':{"message": 'Failed to shorten url'}}))
             res.end()
         }
+    }
+
+    static async generateHash(){
+        let newHash
+        let hashDisponible = false
+        while(!hashDisponible){
+            newHash = crypto.randomBytes(7).toString('hex')
+            const dbHash = await ShortUrlModel.find({"hash_url": newHash})
+
+            if(dbHash.length == 0){
+                hashDisponible = true
+            }
+        }
+        return newHash
     }
 }
 
