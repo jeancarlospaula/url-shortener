@@ -1,28 +1,52 @@
 const url = require('url')
+const ShortenedUrlController = require('../controllers/ShortenedUrlController')
 const ShortenUrlController = require('../controllers/ShortenUrlController')
 
 const routes = (req, res) => {
     const method = req.method
     const urlInfos = url.parse(req.url)
 
-    const rote = urlInfos.pathname
+    const route = urlInfos.pathname
     const queryParams = new URLSearchParams(urlInfos.search)
+
     
     if(method == 'POST'){
-        switch (rote) {
-            case '/shorten':
+        switch (route) {
+            case '/shorten': case '/shorten/':
                 ShortenUrlController.shortenUrl(res, queryParams); break
             default:
-                roteNotFound(res)
+                routeNotFound(res)
+        }
+    }
+            
+    if(method == 'GET'){
+        const hashRoute = validadeRoute(route)
+        const hashValue = hashRoute != ''
+
+        switch (hashValue) {
+            case true:
+                ShortenedUrlController.shortenedUrl(res, hashRoute); break
+            default:
+                routeNotFound(res)
         }
     }
 }
 
-const roteNotFound = (res) => {
+const routeNotFound = (res) => {
     res.writeHead(404, {'Content-Type': 'application/json'})
     res.write(JSON.stringify({'error':{'message':'Route Not Found'}}))
     res.end()
 }
 
+const validadeRoute = (route) => {
+    const pathParams = route.split('/')
+    
+    if(pathParams.length >= 3){
+        return ''
+    }
 
-module.exports = { routes }
+    return pathParams[1]
+}
+
+
+module.exports = { routes, routeNotFound }
