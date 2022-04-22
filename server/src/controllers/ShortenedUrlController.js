@@ -12,7 +12,7 @@ class ShortenUrlController{
                 return
             }
     
-            res.writeHead(301, {'Location': shortedUrl.long_url})
+            res.writeHead(301, {'Location': encodeURI(shortedUrl.long_url)})
             res.end()
         } catch (error) {
             if(error) throw error
