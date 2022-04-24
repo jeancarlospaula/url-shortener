@@ -6,7 +6,7 @@ const connectToDatabase = async () => {
         (error) => {
             if(error) throw error
 
-            return console.log('Banco conectado com sucesso')
+            return console.log('Database successfully connected')
         }
     )
 }

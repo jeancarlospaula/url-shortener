@@ -3,7 +3,8 @@ const ShortUrlModel = require("../models/shortUrl.model")
 class ShortenUrlController{
     static async shortenedUrl(res, hashRoute) {
         try {
-            const shortedUrl = await ShortUrlModel.findOne({"hash_url": hashRoute})
+            let { clicks_number } = await ShortUrlModel.findOne({"hash_url": hashRoute}, {"clicks_number":1})
+            const shortedUrl = await ShortUrlModel.findOneAndUpdate({"hash_url": hashRoute}, {"clicks_number":++clicks_number})
 
             if(!shortedUrl){
                 res.writeHead(404, {'Content-Type': 'application/json'})
