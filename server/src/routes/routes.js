@@ -3,13 +3,12 @@ const ShortenedUrlController = require('../controllers/ShortenedUrlController')
 const ShortenUrlController = require('../controllers/ShortenUrlController')
 
 const routes = (req, res) => {
-    const method = req.method
     const urlInfos = url.parse(req.url)
-
+    
+    const method = req.method
     const route = urlInfos.pathname
     const queryParams = new URLSearchParams(urlInfos.search)
 
-    
     if(method == 'POST'){
         switch (route) {
             case '/shorten': case '/shorten/':
@@ -20,6 +19,13 @@ const routes = (req, res) => {
     }
             
     if(method == 'GET'){
+        if(route === '/favicon.ico'){
+            console.log('Favicon Request')
+            res.statusCode = 204
+            res.end()
+            return
+        }
+
         const hashRoute = validadeRoute(route)
         const hashValue = hashRoute != ''
 
