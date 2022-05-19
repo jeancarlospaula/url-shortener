@@ -21,11 +21,13 @@ class ShortenUrlController{
     
             res.writeHead(301, {'Location': encodeURI(shortedUrlUpdated.long_url)})
             res.end()
+            return
         } catch (error) {
             if(error) throw error
             res.writeHead(501, {'Content-Type': 'application/json'})
             res.write(JSON.stringify({'error':{"message": 'Failed to shorten url'}}))
             res.end()
+            return
         }
     }
 }

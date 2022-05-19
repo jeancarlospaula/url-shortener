@@ -27,6 +27,7 @@ class ShortenUrlController{
                     res.writeHead(400, {'Content-Type': 'application/json'})
                     res.write(JSON.stringify({'error':{"message":"Hash already exists"}}))
                     res.end()
+                    return
                 }
     
                 newHash = hash
@@ -56,6 +57,7 @@ class ShortenUrlController{
             res.writeHead(501, {'Content-Type': 'application/json'})
             res.write(JSON.stringify({'error':{"message": 'Failed to shorten url'}}))
             res.end()
+            return
         }
     }
 
