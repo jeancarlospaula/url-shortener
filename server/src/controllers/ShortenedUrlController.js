@@ -2,6 +2,10 @@ const ShortUrlModel = require("../models/shortUrl.model")
 
 class ShortenUrlController{
     static async shortenedUrl(res, hashRoute) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Request-Method', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST, GET');
+        res.setHeader('Access-Control-Allow-Headers', '*');
         try {
             const shortedUrl = await ShortUrlModel.findOne({"hash_url": hashRoute})
 

@@ -3,6 +3,11 @@ const crypto = require('crypto')
 
 class ShortenUrlController{
     static async shortenUrl(res, params) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Request-Method', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST, GET');
+        res.setHeader('Access-Control-Allow-Headers', '*');
+
         try {
             const longUrl = params.get('url')
             const hash = params.get('hash')
