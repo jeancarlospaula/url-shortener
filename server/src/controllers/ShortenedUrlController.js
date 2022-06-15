@@ -10,8 +10,7 @@ class ShortenUrlController{
             const shortedUrl = await ShortUrlModel.findOne({"hash_url": hashRoute})
 
             if(!shortedUrl){
-                res.writeHead(404, {'Content-Type': 'application/json'})
-                res.write(JSON.stringify({'error':{'message':'Route Not Found'}}))
+                res.writeHead(301, {'Location': process.env.ROUTE_404})
                 res.end()
                 return
             }
