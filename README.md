@@ -1,6 +1,8 @@
 # 📎 CURTIN - URL Shortener 
 Application to shorten url and generate QR Codes
 
+![image](https://user-images.githubusercontent.com/79765050/173962974-fd8557a9-7a42-40ed-982a-6d57a40aa2c2.png)
+
 ## Documentation
 ### Shorten URL
 - Request route: ```https://curtin.herokuapp.com/shorten/```
